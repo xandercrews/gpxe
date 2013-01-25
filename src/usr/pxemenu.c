@@ -287,6 +287,9 @@ static int pxe_menu_prompt_and_select ( struct pxe_menu *menu ) {
 	int key;
 	int rc = 0;
 
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#pragma GCC diagnostic push
+
 	/* Display menu immediately, if specified to do so */
 	if ( menu->timeout < 0 ) {
 		if ( menu->prompt )
@@ -327,6 +330,8 @@ static int pxe_menu_prompt_and_select ( struct pxe_menu *menu ) {
 			start = now;
 		}
 	}
+
+#pragma GCC diagnostic pop
 
 	/* Return with default option selected */
 	printf ( "\n" );

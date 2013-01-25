@@ -491,7 +491,10 @@ static int ftp_open ( struct xfer_interface *xfer, struct uri *uri ) {
 	ftp = zalloc ( sizeof ( *ftp ) );
 	if ( ! ftp )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &ftp->refcnt, ftp_free );
+#pragma GCC diagnostic pop
 	xfer_init ( &ftp->xfer, &ftp_xfer_operations, &ftp->refcnt );
 	ftp->uri = uri_get ( uri );
 	xfer_init ( &ftp->control, &ftp_control_operations, &ftp->refcnt );

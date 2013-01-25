@@ -1442,7 +1442,10 @@ int start_dhcp ( struct job_interface *job, struct net_device *netdev ) {
 	dhcp = zalloc ( sizeof ( *dhcp ) );
 	if ( ! dhcp )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &dhcp->refcnt, dhcp_free );
+#pragma GCC diagnostic pop
 	job_init ( &dhcp->job, &dhcp_job_operations, &dhcp->refcnt );
 	xfer_init ( &dhcp->xfer, &dhcp_xfer_operations, &dhcp->refcnt );
 	timer_init ( &dhcp->timer, dhcp_timer_expired );
@@ -1545,7 +1548,10 @@ int start_pxebs ( struct job_interface *job, struct net_device *netdev,
 			sizeof ( *ip ) /* terminator */ );
 	if ( ! dhcp )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &dhcp->refcnt, dhcp_free );
+#pragma GCC diagnostic pop
 	job_init ( &dhcp->job, &dhcp_job_operations, &dhcp->refcnt );
 	xfer_init ( &dhcp->xfer, &dhcp_xfer_operations, &dhcp->refcnt );
 	timer_init ( &dhcp->timer, dhcp_timer_expired );

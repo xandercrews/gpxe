@@ -2144,7 +2144,10 @@ static int qib7322_ahb_mod_reg ( struct qib7322 *qib7322, unsigned int location,
 		goto out_release;
 
 	/* Update value */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#pragma GCC diagnostic push
 	new_value = ( ( old_value & ~mask ) | value );
+#pragma GCC diagnostic pop
 	DBGCP ( qib7322, "QIB7322 %p AHB %x %#08x => %#08x\n",
 		qib7322, location, old_value, new_value );
 	if ( ( rc = qib7322_ahb_write ( qib7322, location, new_value ) ) != 0 )

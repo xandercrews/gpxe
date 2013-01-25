@@ -1134,7 +1134,10 @@ static int tftp_core_open ( struct xfer_interface *xfer, struct uri *uri,
 	tftp = zalloc ( sizeof ( *tftp ) );
 	if ( ! tftp )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &tftp->refcnt, tftp_free );
+#pragma GCC diagnostic pop
 	xfer_init ( &tftp->xfer, &tftp_xfer_operations, &tftp->refcnt );
 	xfer_init ( &tftp->socket, &tftp_socket_operations, &tftp->refcnt );
 	xfer_init ( &tftp->mc_socket, &tftp_mc_socket_operations,

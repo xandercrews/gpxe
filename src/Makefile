@@ -4,7 +4,7 @@
 #
 
 CLEANUP		:=
-CFLAGS		:=
+CFLAGS		:= -Wno-error=unused-variable -Wno-error=unused-but-set-variable
 ASFLAGS		:=
 LDFLAGS		:=
 MAKEDEPS	:= Makefile

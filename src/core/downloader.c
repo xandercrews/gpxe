@@ -264,7 +264,10 @@ int create_downloader ( struct job_interface *job, struct image *image,
 	downloader = zalloc ( sizeof ( *downloader ) );
 	if ( ! downloader )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &downloader->refcnt, downloader_free );
+#pragma GCC diagnostic pop
 	job_init ( &downloader->job, &downloader_job_operations,
 		   &downloader->refcnt );
 	xfer_init ( &downloader->xfer, &downloader_xfer_operations,

@@ -305,10 +305,13 @@ static int myri10ge_command ( struct myri10ge_private *priv,
 	command->response_addr.high = 0;
 	command->response_addr.low
 		= htonl ( virt_to_bus ( &priv->dma->command_response ) );
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
 	for ( i=0; i<36; i+=4 )
 		* ( uint32 * ) &command->pad[i] = 0;
 	wmb();
 	* ( uint32 * ) &command->pad[36] = 0;
+#pragma GCC diagnostic pop
 
 	/* Wait up to 2 seconds for a response. */
 

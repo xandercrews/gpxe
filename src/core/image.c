@@ -65,7 +65,10 @@ struct image * alloc_image ( void ) {
 
 	image = zalloc ( sizeof ( *image ) );
 	if ( image ) {
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 		ref_init ( &image->refcnt, free_image );
+#pragma GCC diagnostic pop
 	}
 	return image;
 }

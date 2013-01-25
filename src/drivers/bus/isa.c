@@ -109,7 +109,10 @@ static int isabus_probe ( struct root_device *rootdev ) {
 			}
 			memset ( isa, 0, sizeof ( *isa ) );
 			isa->driver = driver;
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic push
 			isa->ioaddr = ISA_IOADDR ( driver, ioidx );
+#pragma GCC diagnostic pop
 
 			/* Add to device hierarchy */
 			snprintf ( isa->dev.name, sizeof ( isa->dev.name ),

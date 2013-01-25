@@ -788,7 +788,10 @@ int start_dhcp6 ( struct job_interface *job, struct net_device *netdev,
 		}
 	}
 	
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &dhcp->refcnt, dhcp6_free );
+#pragma GCC diagnostic pop
 	job_init ( &dhcp->job, &dhcp6_job_operations, &dhcp->refcnt );
 	xfer_init ( &dhcp->xfer, &dhcp6_xfer_operations, &dhcp->refcnt );
 	timer_init ( &dhcp->timer, dhcp_timer_expired );

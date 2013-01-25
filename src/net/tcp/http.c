@@ -547,7 +547,10 @@ int http_open_filter ( struct xfer_interface *xfer, struct uri *uri,
 	http = zalloc ( sizeof ( *http ) );
 	if ( ! http )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &http->refcnt, http_free );
+#pragma GCC diagnostic pop
 	xfer_init ( &http->xfer, &http_xfer_operations, &http->refcnt );
        	http->uri = uri_get ( uri );
 	xfer_init ( &http->socket, &http_socket_operations, &http->refcnt );

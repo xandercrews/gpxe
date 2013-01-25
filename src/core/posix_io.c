@@ -198,7 +198,10 @@ int open ( const char *uri_string ) {
 	file = zalloc ( sizeof ( *file ) );
 	if ( ! file )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &file->refcnt, posix_file_free );
+#pragma GCC diagnostic pop
 	file->fd = fd;
 	file->rc = -EINPROGRESS;
 	xfer_init ( &file->xfer, &posix_file_xfer_operations,

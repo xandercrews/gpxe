@@ -438,7 +438,10 @@ int aoe_attach ( struct ata_device *ata, struct net_device *netdev,
 	aoe = zalloc ( sizeof ( *aoe ) );
 	if ( ! aoe )
 		return -ENOMEM;
+#pragma GCC diagnostic ignored "-Waddress"
+#pragma GCC diagnostic push
 	ref_init ( &aoe->refcnt, aoe_free );
+#pragma GCC diagnostic pop
 	timer_init ( &aoe->timer, aoe_timer_expired );
 	aoe->netdev = netdev_get ( netdev );
 	memcpy ( aoe->target, netdev->ll_broadcast, sizeof ( aoe->target ) );
